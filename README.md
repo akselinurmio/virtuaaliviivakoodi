@@ -1,6 +1,6 @@
 [![Travis](https://img.shields.io/travis/akselinurmio/virtuaaliviivakoodi.svg)](https://travis-ci.org/akselinurmio/virtuaaliviivakoodi)
 [![Coveralls](https://img.shields.io/coveralls/akselinurmio/virtuaaliviivakoodi.svg)](https://coveralls.io/github/akselinurmio/virtuaaliviivakoodi)
-[![David](https://img.shields.io/david/akselinurmio/virtuaaliviivakoodi.svg)](https://github.com/akselinurmio/virtuaaliviivakoodi)
+[![David](https://img.shields.io/david/akselinurmio/virtuaaliviivakoodi.svg)](https://david-dm.org/akselinurmio/virtuaaliviivakoodi)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/akselinurmio/virtuaaliviivakoodi/master/LICENSE)
 
 *Virtuaaliviivakoodi* is clear text implementation of [The Federation of Finnish Financial Services](http://www.finanssiala.fi/en)' Pankkiviivakoodi ("Finnish bank transfer barcode"). Pankkiviivakoodi's specification can be found on [their website](http://www.finanssiala.fi/maksujenvalitys/dokumentit/Pankkiviivakoodi-opas.pdf "Pankkiviivakoodi-opas").
