@@ -1,4 +1,5 @@
 [![Travis](https://img.shields.io/travis/akselinurmio/virtuaaliviivakoodi.svg)](https://travis-ci.org/akselinurmio/virtuaaliviivakoodi)
+[![Coveralls](https://img.shields.io/coveralls/akselinurmio/virtuaaliviivakoodi.svg)](https://coveralls.io/github/akselinurmio/virtuaaliviivakoodi)
 [![David](https://img.shields.io/david/akselinurmio/virtuaaliviivakoodi.svg)](https://github.com/akselinurmio/virtuaaliviivakoodi)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/akselinurmio/virtuaaliviivakoodi/master/LICENSE)
 
