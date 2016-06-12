@@ -2,6 +2,11 @@
   "name": "virtuaaliviivakoodi",
   "version": "1.0.0",
   "description": "Creates the numeral value of Finnish bank transfer barcode",
+  "keywords": [
+    "pankkiviivakoodi",
+    "bank transfer",
+    "wire transfer"
+  ],
   "main": "index.js",
   "dependencies": {
     "iban": "0.0.6"
@@ -18,11 +23,12 @@
     "coverage": "tap --cov --coverage-report=html test/*.test.js",
     "lint": "eslint *.js test/*.test.js"
   },
-  "repository": "gitlab:jouhisorsa/virtuaaliviivakoodi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akselinurmio/virtuaaliviivakoodi.git"
+  },
   "author": "Akseli Nurmio <akseli@nurmio.fi> (https://akselinurmio.fi)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://gitlab.com/jouhisorsa/virtuaaliviivakoodi/issues"
-  },
-  "homepage": "https://gitlab.com/jouhisorsa/virtuaaliviivakoodi#README"
+  "homepage": "https://github.com/akselinurmio/virtuaaliviivakoodi",
+  "bugs": "https://github.com/akselinurmio/virtuaaliviivakoodi/issues"
 }
