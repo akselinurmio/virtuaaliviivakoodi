@@ -7,7 +7,7 @@ const methods = require('./methods')
  * @param {Object} given - Information that will be included.
  * @param {String} given.iban - IBAN formed account number
  * @param {Number|String} given.reference - Reference number in either international or national form
- * @param {Number} [given.amount] - Amount of maximum of 999999.99 in euros
+ * @param {Number} [given.amount] - Amount in euros with maximum of 999999.99 and minimum of 0.01
  * @param {String} [given.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */

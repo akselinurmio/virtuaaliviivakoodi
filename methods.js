@@ -76,7 +76,7 @@ module.exports = {
 
   /**
    * Converts given amount to 8 characters long string.
-   * The amount can't be more than 999999.99.
+   * The amount can't be negative or bigger than 999999.99.
    * @param {Number} amount
    * @return {String} Padded amount string
   */

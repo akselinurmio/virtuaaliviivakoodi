@@ -24,7 +24,7 @@ Function accepts one parameter: an **object** containing information to be inclu
 | --- | --- | --- | --- |
 | `iban` | String | | IBAN formed account number |
 | `reference` | Number or String | | Reference number in either international or national form |
-| `amount` | Number | optional | Amount of maximum of 999999.99 in euros |
+| `amount` | Number | optional | Amount in euros with maximum of 999999.99 and minimum of 0.01 |
 | `due` | String | optional | Due date in form of "vvkkpp" where vv is year, kk is month and pp is day |
 
 Function returns a string containing the Virtuaaliviivakoodi.
