@@ -1,6 +1,6 @@
 {
   "name": "virtuaaliviivakoodi",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates the numeral value of Finnish bank transfer barcode",
   "keywords": [
     "pankkiviivakoodi",
