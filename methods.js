@@ -83,6 +83,9 @@ module.exports = {
   convertAmount: function convertAmount (amount) {
     if (typeof amount !== 'number' || isNaN(amount)) throw new Error('Given amount is not valid')
 
+    // Check if the given amount is negative and throw an exception if it is
+    if (amount < 0) throw new Error('Given amount is negative')
+
     // Check if the given amount is too big and throw an exception if it is
     if (amount > 999999.99) throw new Error('Given amount is too big')
 

@@ -49,7 +49,7 @@ test('determine version', function determineVersionTests (t) {
 })
 
 test('convert amounts', function convertAmountTests (t) {
-  t.plan(7)
+  t.plan(8)
 
   t.equal(methods.convertAmount(25.20), '00002520', 'With cents')
   t.equal(methods.convertAmount(200), '00020000', 'Integer')
@@ -59,6 +59,7 @@ test('convert amounts', function convertAmountTests (t) {
   t.throws(function () { methods.convertAmount('27.56') }, 'String')
   t.throws(function () { methods.convertAmount() }, 'No argument')
   t.throws(function () { methods.convertAmount(27.566) }, 'Too many decimals')
+  t.throws(function () { methods.convertAmount(-0.01) }, 'Negative value')
 })
 
 test('pad correctly', function padTests (t) {
