@@ -34,31 +34,31 @@ Function returns a string containing the Virtuaaliviivakoodi.
 #### Version 4
 
 ```javascript
-const virtuaaliviivakoodi = require("virtuaaliviivakoodi");
+const virtuaaliviivakoodi = require("virtuaaliviivakoodi")
 
 const options = {
   iban: "FI37 1590 3000 0007 76",
   reference: 11112,
   amount: 12.25,
   due: "161221"
-};
+}
 
-virtuaaliviivakoodi(options);
+virtuaaliviivakoodi(options)
 // => "437159030000007760000122500000000000000000011112161221"
 ```
 
 #### Version 5
 
 ```javascript
-const virtuaaliviivakoodi = require("virtuaaliviivakoodi");
+const virtuaaliviivakoodi = require("virtuaaliviivakoodi")
 
 const options = {
   iban: "FI37 1590 3000 0007 76",
   reference: "RF9811112", // Creditor Reference, ISO 11649
   amount: 1.10,
   due: "170101"
-};
+}
 
-virtuaaliviivakoodi(options);
+virtuaaliviivakoodi(options)
 // => "537159030000007760000011098000000000000000011112170101"
 ```
