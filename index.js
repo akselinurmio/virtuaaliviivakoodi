@@ -20,27 +20,27 @@ module.exports = function Virtuaaliviivakoodi(options) {
   const formatted = {}
 
   // IBAN must be given
-  if ('iban' in options) {
+  if (options.iban) {
     formatted.iban = methods.convertIBAN(options.iban)
   } else {
     throw new Error('No IBAN specified')
   }
 
   // Reference must be given
-  if ('reference' in options) {
+  if (options.reference) {
     formatted.reference = methods.convertReference(options.reference)
     formatted.version = methods.referenceToVersion(options.reference)
   } else {
     throw new Error('No reference specified')
   }
 
-  if ('amount' in options) {
+  if (options.amount) {
     formatted.amount = methods.convertAmount(options.amount)
   } else {
     formatted.amount = methods.pad('', 8)
   }
 
-  if ('due' in options) {
+  if (options.due) {
     formatted.due = methods.checkDue(options.due)
   } else {
     formatted.due = methods.pad('', 6)
