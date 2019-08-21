@@ -18,7 +18,7 @@
     "tap": "^14.6.1"
   },
   "scripts": {
-    "lint": "prettier --check ./*.js ./test/*.js",
+    "lint": "prettier --check {./,test/}*.{js,json,md,ts}",
     "test": "npm run -s lint && tap test/*.test.js"
   },
   "repository": {
@@ -39,7 +39,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,md}": [
+    "*.{js,json,md,ts}": [
       "prettier --write",
       "git add"
     ]
