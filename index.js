@@ -13,28 +13,38 @@ const methods = require('./methods')
  */
 module.exports = function Virtuaaliviivakoodi(options) {
   // Check that "given" parameter is an object
-  if (typeof options !== 'object')
+  if (typeof options !== 'object') {
     throw new Error('Object must be given as parameter')
+  }
 
   const formatted = {}
 
   // IBAN must be given
-  if ('iban' in options) formatted.iban = methods.convertIBAN(options.iban)
-  else throw new Error('No IBAN specified')
+  if ('iban' in options) {
+    formatted.iban = methods.convertIBAN(options.iban)
+  } else {
+    throw new Error('No IBAN specified')
+  }
 
   // Reference must be given
-  if ('reference' in options)
+  if ('reference' in options) {
     formatted.reference = methods.convertReference(options.reference)
-  else throw new Error('No reference specified')
+    formatted.version = methods.referenceToVersion(formatted.reference)
+  } else {
+    throw new Error('No reference specified')
+  }
 
-  formatted.version = methods.referenceToVersion(formatted.reference)
-
-  if ('amount' in options)
+  if ('amount' in options) {
     formatted.amount = methods.convertAmount(options.amount)
-  else formatted.amount = methods.pad('', 8)
+  } else {
+    formatted.amount = methods.pad('', 8)
+  }
 
-  if ('due' in options) formatted.due = methods.checkDue(options.due)
-  else formatted.due = methods.pad('', 6)
+  if ('due' in options) {
+    formatted.due = methods.checkDue(options.due)
+  } else {
+    formatted.due = methods.pad('', 6)
+  }
 
   return (
     formatted.version +

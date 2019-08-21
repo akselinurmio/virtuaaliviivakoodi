@@ -116,6 +116,19 @@ test('convert amounts', function convertAmountTests(t) {
   }, 'Negative value')
 })
 
+test('count decimals', function countDecimals(t) {
+  t.plan(5)
+
+  t.equal(methods.countDecimals(120), 0, 'No decimals')
+  t.equal(methods.countDecimals(12.1), 1, 'One decimal')
+  t.equal(methods.countDecimals(12.12), 2, 'Two decimals')
+  t.equal(methods.countDecimals(Math.PI), 15, 'Maximum amount of decimals')
+
+  t.throws(function() {
+    methods.countDecimals('120')
+  }, 'String as an argument')
+})
+
 test('pad correctly', function padTests(t) {
   t.plan(5)
 
