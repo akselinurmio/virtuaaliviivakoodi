@@ -3,7 +3,7 @@
  * @module virtuaaliviivakoodi/methods
  */
 
-const IBAN = require('iban')
+const ibanTool = require('iban')
 
 module.exports = {
   /**
@@ -13,10 +13,10 @@ module.exports = {
    * @returns {String}
    */
   checkDue: function checkDue(due) {
-    const PATTERN = /^[0-9]{6}$/
+    const pattern = /^[0-9]{6}$/
 
     if (typeof due !== 'string') throw new Error('Due date is not a string')
-    if (!PATTERN.test(due)) throw new Error('Due date is not valid')
+    if (!pattern.test(due)) throw new Error('Due date is not valid')
 
     return due
   },
@@ -27,15 +27,15 @@ module.exports = {
    * @returns {String} Converted IBAN
    */
   convertIBAN: function convertIBAN(iban) {
-    const PATTERN = /^FI/
+    const pattern = /^FI/
 
     if (typeof iban !== 'string') throw new Error('IBAN value is not a string')
 
-    if (!IBAN.isValid(iban)) throw new Error('Given IBAN is not valid')
-    if (!PATTERN.test(iban)) throw new Error('Given IBAN is not Finnish')
+    if (!ibanTool.isValid(iban)) throw new Error('Given IBAN is not valid')
+    if (!pattern.test(iban)) throw new Error('Given IBAN is not Finnish')
 
     // Return electronic format IBAN with country code removed
-    return IBAN.electronicFormat(iban).substring(2)
+    return ibanTool.electronicFormat(iban).substring(2)
   },
 
   /**
@@ -48,15 +48,20 @@ module.exports = {
     if (!/^(string|number)$/.test(typeof reference))
       throw new Error('Given reference is neither number or string')
 
-    const INT_PATTERN = /^RF[0-9]{3,23}$/
-    const NAT_PATTERN = /^[0-9]{4,20}$/
-    const REF_STRING = (reference + '').replace(/\s/g, '')
+    const internationalPattern = /^RF[0-9]{3,23}$/
+    const nationalPattern = /^[0-9]{4,20}$/
+
+    const plainReference = (reference + '').replace(/\s/g, '')
 
     // In case of international reference we pad everything after checksum
-    if (INT_PATTERN.test(REF_STRING))
-      return REF_STRING.substring(2, 4) + this.pad(REF_STRING.substring(4), 21)
+    if (internationalPattern.test(plainReference))
+      return (
+        plainReference.substring(2, 4) +
+        this.pad(plainReference.substring(4), 21)
+      )
     // In case of national reference we pad everything
-    else if (NAT_PATTERN.test(REF_STRING)) return this.pad(REF_STRING, 20)
+    else if (nationalPattern.test(plainReference))
+      return this.pad(plainReference, 20)
     // If both checks fail, the refererence number is invalid
     else throw new Error('Given reference is not valid')
   },
@@ -93,12 +98,12 @@ module.exports = {
     if (amount > 999999.99) throw new Error('Given amount is too big')
 
     // Count decimals of amount
-    const DECIMALS = (function countDecimals(value) {
+    const decimals = (function countDecimals(value) {
       if (Math.floor(value) === value) return 0
       return value.toString().split('.')[1].length
     })(amount)
 
-    if (DECIMALS > 2) throw new Error("There can't be more than two decimals")
+    if (decimals > 2) throw new Error("There can't be more than two decimals")
 
     // Turn the given amount into array of euros and cents
     const ARRAY = amount.toFixed(2).split('.')
