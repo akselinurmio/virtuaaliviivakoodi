@@ -8,6 +8,7 @@
     "wire transfer"
   ],
   "main": "index.js",
+  "types": "./index.d.ts",
   "dependencies": {
     "iban": "0.0.12"
   },
