@@ -14,11 +14,11 @@
   "devDependencies": {
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
-    "standard": "13.1.0",
+    "prettier": "1.18.2",
     "tap": "^14.6.1"
   },
   "scripts": {
-    "lint": "standard **/*.js",
+    "lint": "prettier --check ./*.js ./test/*.js",
     "test": "npm run -s lint && tap test/*.test.js"
   },
   "repository": {
@@ -29,14 +29,18 @@
   "license": "MIT",
   "homepage": "https://github.com/akselinurmio/virtuaaliviivakoodi",
   "bugs": "https://github.com/akselinurmio/virtuaaliviivakoodi/issues",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.js": [
-      "standard --fix",
+    "*.{js,json,md}": [
+      "prettier --write",
       "git add"
     ]
   },

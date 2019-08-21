@@ -11,9 +11,10 @@ const methods = require('./methods')
  * @param {String} [given.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */
-module.exports = function Virtuaaliviivakoodi (given) {
+module.exports = function Virtuaaliviivakoodi(given) {
   // Check that "given" parameter is an object
-  if (typeof given !== 'object') throw new Error('Object must be given as parameter')
+  if (typeof given !== 'object')
+    throw new Error('Object must be given as parameter')
 
   const content = {}
 
@@ -22,7 +23,8 @@ module.exports = function Virtuaaliviivakoodi (given) {
   else throw new Error('No IBAN specified')
 
   // Reference must be given
-  if ('reference' in given) content.reference = methods.convertReference(given.reference)
+  if ('reference' in given)
+    content.reference = methods.convertReference(given.reference)
   else throw new Error('No reference specified')
 
   content.version = methods.referenceToVersion(content.reference)
@@ -33,5 +35,11 @@ module.exports = function Virtuaaliviivakoodi (given) {
   if ('due' in given) content.due = methods.checkDue(given.due)
   else content.due = methods.pad('', 6)
 
-  return content.version + content.iban + content.amount + methods.pad(content.reference, 23) + content.due
+  return (
+    content.version +
+    content.iban +
+    content.amount +
+    methods.pad(content.reference, 23) +
+    content.due
+  )
 }
