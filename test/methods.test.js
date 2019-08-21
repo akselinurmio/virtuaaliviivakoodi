@@ -38,12 +38,12 @@ test('convert reference numbers', function convertReferenceTests(t) {
 
   t.equal(
     methods.convertReference('12345 67891 23456 78917'),
-    '12345678912345678917',
+    '00012345678912345678917',
     'National reference with spaces'
   )
   t.equal(
     methods.convertReference(1232),
-    '00000000000000001232',
+    '00000000000000000001232',
     'National reference as number'
   )
 
@@ -75,9 +75,9 @@ test('determine version', function determineVersionTests(t) {
     'National reference'
   )
   t.equal(
-    methods.referenceToVersion('54000000000000000111135'),
+    methods.referenceToVersion('RF54111135'),
     5,
-    'National reference'
+    'International reference'
   )
 
   t.throws(function() {

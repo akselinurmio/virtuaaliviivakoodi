@@ -29,7 +29,7 @@ module.exports = function Virtuaaliviivakoodi(options) {
   // Reference must be given
   if ('reference' in options) {
     formatted.reference = methods.convertReference(options.reference)
-    formatted.version = methods.referenceToVersion(formatted.reference)
+    formatted.version = methods.referenceToVersion(options.reference)
   } else {
     throw new Error('No reference specified')
   }
@@ -50,7 +50,7 @@ module.exports = function Virtuaaliviivakoodi(options) {
     formatted.version +
     formatted.iban +
     formatted.amount +
-    methods.pad(formatted.reference, 23) +
+    formatted.reference +
     formatted.due
   )
 }

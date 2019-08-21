@@ -5,6 +5,10 @@
 
 const ibanTool = require('iban')
 
+// Different versions of Virtuaaliviivakoodi
+const versionNational = 4
+const versionInternational = 5
+
 module.exports = {
   /**
    * Check that given due date is of proper length and return only valid string.
@@ -59,42 +63,45 @@ module.exports = {
       throw new Error('Given reference is neither number or string')
     }
 
-    const internationalPattern = /^RF[0-9]{3,23}$/
-    const nationalPattern = /^[0-9]{4,20}$/
+    // Convert the reference number to string and remove any whitespace
+    reference = String(reference).replace(/\s/g, '')
 
-    const plainReference = String(reference).replace(/\s/g, '')
+    // Determine how to pad the reference from the version
+    const version = this.referenceToVersion(reference)
 
     // In case of international reference we pad everything after checksum
-    if (internationalPattern.test(plainReference)) {
-      return (
-        plainReference.substring(2, 4) +
-        this.pad(plainReference.substring(4), 21)
-      )
+    if (version === versionInternational) {
+      reference =
+        reference.substring(2, 4) + this.pad(reference.substring(4), 21)
     }
-    // In case of national reference we pad everything
-    else if (nationalPattern.test(plainReference)) {
-      return this.pad(plainReference, 20)
-    }
-    // If both checks fail, the refererence number is invalid
-    else {
-      throw new Error('Given reference is not valid')
-    }
+
+    return this.pad(reference, 23)
   },
 
   /**
-   * Determine Virtuaaliviivakoodi's version by padded reference number.
+   * Determine Virtuaaliviivakoodi's version by given reference number.
    * Return values are 5 = international reference and 4 = national type.
-   * @param {String} reference - Padded reference number
-   * @returns {Number} 4 or 5
+   * @param {Number|String} reference - Reference number
+   * @returns {Number} The version
    */
   referenceToVersion: function referenceToVersion(reference) {
-    if (typeof reference !== 'string') {
-      throw new Error('Given reference is not a string')
+    if (!/^(string|number)$/.test(typeof reference)) {
+      throw new Error('Given reference is neither number or string')
     }
 
-    if (reference.length === 23) return 5
-    else if (reference.length === 20) return 4
-    else throw new Error('Given reference is not of proper length')
+    // Convert the reference number to string and remove any whitespace
+    const referenceString = String(reference).replace(/\s/g, '')
+
+    const internationalPattern = /^RF[0-9]{3,23}$/
+    const nationalPattern = /^[0-9]{4,20}$/
+
+    if (internationalPattern.test(referenceString)) {
+      return versionInternational
+    }
+    if (nationalPattern.test(referenceString)) {
+      return versionNational
+    }
+    throw new Error('Given reference is not valid')
   },
 
   /**
