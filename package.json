@@ -16,11 +16,13 @@
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
     "prettier": "1.18.2",
+    "semantic-release": "^15.13.21",
     "tap": "^14.6.1"
   },
   "scripts": {
     "lint": "prettier --check ./{,src/}*.{js,json,md,ts}",
-    "test": "npm run -s lint && tap src/*.test.js"
+    "test": "npm run -s lint && tap src/*.test.js",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
