@@ -2,13 +2,13 @@ const test = require('tap').test
 const virtuaaliviivakoodi = require('./')
 
 test('main function', function mainFunctionTests(t) {
-  t.plan(6)
+  t.plan(7)
 
   t.equal(
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       reference: 11112,
-      amount: 12.25,
+      cents: 1225,
       due: '161221'
     }),
     '437159030000007760000122500000000000000000011112161221',
@@ -54,4 +54,14 @@ test('main function', function mainFunctionTests(t) {
       due: '170101'
     })
   }, 'No reference number given')
+
+  t.throws(function() {
+    virtuaaliviivakoodi({
+      iban: 'FI37 1590 3000 0007 76',
+      due: '170101',
+      reference: 11112,
+      cents: 110,
+      amount: 1.1
+    })
+  }, 'Cents and amount given')
 })

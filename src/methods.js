@@ -107,6 +107,7 @@ module.exports = {
   /**
    * Converts given amount to 8 characters long string.
    * The amount can't be negative or bigger than 999999.99.
+   * @deprecated Replaced by {@link convertAmountOfCents}
    * @param {Number} amount
    * @returns {String} Padded amount string
    */
@@ -136,6 +137,37 @@ module.exports = {
 
     // Return string of padded euros and cents
     return this.pad(amountArray[0], 6) + amountArray[1]
+  },
+
+  /**
+   * Converts given amount of cents to 8 characters long string.
+   * The amount can't be negative or bigger than 99999999.
+   * @param {Number} cents
+   * @returns {String} Padded amount string
+   */
+  convertAmountOfCents: function convertAmountOfCents(cents) {
+    if (typeof cents !== 'number' || isNaN(cents)) {
+      throw new Error('Given argument is not a number')
+    }
+
+    // Throw if the amount of cents is negative
+    if (cents < 0) {
+      throw new Error('Given amount is negative')
+    }
+
+    // Throw if the amount of cents is too large
+    if (cents > 99999999) {
+      throw new Error('Given amount is too large')
+    }
+
+    // Check that cents is an integer
+    const isInteger = this.countDecimals(cents) === 0
+    if (!isInteger) {
+      throw new Error('Given amount is not an integer')
+    }
+
+    // Return string of padded cents
+    return this.pad(cents, 8)
   },
 
   /**

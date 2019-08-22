@@ -4,10 +4,12 @@ const methods = require('./methods')
 
 /**
  * Returns Virtuaaliviivakoodi as a string.
+ * Use only cents OR amount, not both.
  * @param {Object} options - Information that will be included.
  * @param {String} options.iban - IBAN formed account number
  * @param {Number|String} options.reference - Reference number in either international or national form
- * @param {Number} [options.amount] - Amount in euros with maximum of 999999.99 and minimum of 0.01
+ * @param {Number} [options.cents] - Amount in cents (1€ = 100c) with maximum of 99999999
+ * @param {Number} [options.amount] - Deprecated: Amount in euros with maximum of 999999.99
  * @param {String} [options.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */
@@ -34,7 +36,12 @@ module.exports = function Virtuaaliviivakoodi(options) {
     throw new Error('No reference specified')
   }
 
-  if (options.amount) {
+  if (options.cents && options.amount) {
+    throw new Error('Give either cents or amount parameter, not both')
+  }
+  if (options.cents) {
+    formatted.amount = methods.convertAmountOfCents(options.cents)
+  } else if (options.amount) {
     formatted.amount = methods.convertAmount(options.amount)
   } else {
     formatted.amount = methods.pad('', 8)

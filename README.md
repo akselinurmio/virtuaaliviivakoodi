@@ -24,8 +24,9 @@ Function accepts one parameter: an **object** containing information to be inclu
 | ----------- | ---------------- | ---------- | ------------------------------------------------------------------------ |
 | `iban`      | String           |            | IBAN formed account number                                               |
 | `reference` | Number or String |            | Reference number in either international or national form                |
-| `amount`    | Number           | optional   | Amount in euros with maximum of 999999.99 and minimum of 0.01            |
-| `due`       | String           | optional   | Due date in form of "vvkkpp" where vv is year, kk is month and pp is day |
+| `cents`     | Number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                     |
+| `amount`    | Number           | optional   | Deprecated: Amount in euros with maximum of 999999.99                    |
+| `due`       | String           | optional   | Due date in form of "YYMMDD" where YY is year, MM is month and DD is day |
 
 Function returns a string containing the Virtuaaliviivakoodi.
 
@@ -39,7 +40,7 @@ const virtuaaliviivakoodi = require('virtuaaliviivakoodi')
 const options = {
   iban: 'FI37 1590 3000 0007 76',
   reference: 11112,
-  amount: 12.25,
+  cents: 1225, // 12.25 euros
   due: '161221'
 }
 
@@ -55,7 +56,7 @@ const virtuaaliviivakoodi = require('virtuaaliviivakoodi')
 const options = {
   iban: 'FI37 1590 3000 0007 76',
   reference: 'RF9811112', // Creditor Reference, ISO 11649
-  amount: 1.1,
+  cents: 110, // 1.10 euros
   due: '170101'
 }
 

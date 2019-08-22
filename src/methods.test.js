@@ -116,6 +116,26 @@ test('convert amounts', function convertAmountTests(t) {
   }, 'Negative value')
 })
 
+test('count amounts of cents', function convertAmountOfCentsTests(t) {
+  t.plan(6)
+
+  t.equal(methods.convertAmountOfCents(1), '00000001', 'One cent')
+  t.equal(methods.convertAmountOfCents(500), '00000500', 'Five euros')
+
+  t.throws(function() {
+    methods.convertAmountOfCents(-1)
+  }, 'Negative')
+  t.throws(function() {
+    methods.convertAmountOfCents(100000000)
+  }, 'Too many cents')
+  t.throws(function() {
+    methods.convertAmountOfCents(1.1)
+  }, 'Floating point')
+  t.throws(function() {
+    methods.convertAmountOfCents('1')
+  }, 'String as an argument')
+})
+
 test('count decimals', function countDecimals(t) {
   t.plan(5)
 
