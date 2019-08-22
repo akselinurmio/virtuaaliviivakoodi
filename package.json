@@ -13,6 +13,7 @@
     "iban": "0.0.12"
   },
   "devDependencies": {
+    "@semantic-release/git": "^7.0.16",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
     "prettier": "1.18.2",
@@ -45,6 +46,21 @@
     "*.{js,json,md,ts}": [
       "prettier --write",
       "git add"
+    ]
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/error",
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      [
+        "@semantic-release/github",
+        {
+          "failTitle": false
+        }
+      ],
+      "@semantic-release/release-notes-generator"
     ]
   },
   "tap": {
