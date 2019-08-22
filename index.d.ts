@@ -18,10 +18,10 @@ declare namespace virtuaaliviivakoodi {
     /**
      * Amount in EUR
      */
-    amount: number;
+    amount?: number;
     /**
      * Due date in format YYMMDD
      */
-    due: string
+    due?: string
   }
 }
