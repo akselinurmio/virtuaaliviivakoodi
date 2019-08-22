@@ -14,7 +14,7 @@ declare namespace virtuaaliviivakoodi {
     /**
      * Valid Finnish bank reference or ISO 11649 Creditor Reference
      */
-    reference?: number|string;
+    reference: number|string;
     /**
      * Amount in EUR
      */
