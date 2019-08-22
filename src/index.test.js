@@ -1,5 +1,5 @@
 const test = require('tap').test
-const virtuaaliviivakoodi = require('../')
+const virtuaaliviivakoodi = require('./')
 
 test('main function', function mainFunctionTests(t) {
   t.plan(6)

@@ -7,8 +7,8 @@
     "bank transfer",
     "wire transfer"
   ],
-  "main": "index.js",
-  "types": "./index.d.ts",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "dependencies": {
     "iban": "0.0.12"
   },
@@ -19,8 +19,8 @@
     "tap": "^14.6.1"
   },
   "scripts": {
-    "lint": "prettier --check {./,test/}*.{js,json,md,ts}",
-    "test": "npm run -s lint && tap test/*.test.js"
+    "lint": "prettier --check ./{,src/}*.{js,json,md,ts}",
+    "test": "npm run -s lint && tap src/*.test.js"
   },
   "repository": {
     "type": "git",

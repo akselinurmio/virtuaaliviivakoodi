@@ -1,5 +1,5 @@
 const test = require('tap').test
-const methods = require('../methods')
+const methods = require('./methods')
 
 test('check due dates', function checkDueTests(t) {
   t.plan(3)
