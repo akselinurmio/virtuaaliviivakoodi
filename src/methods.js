@@ -85,7 +85,7 @@ module.exports = {
    * @returns {Number} The version
    */
   referenceToVersion: function referenceToVersion(reference) {
-    if (!/^(string|number)$/.test(typeof reference)) {
+    if (!['string', 'number'].includes(typeof reference)) {
       throw new Error('Given reference is neither number or string')
     }
 
@@ -182,7 +182,7 @@ module.exports = {
     }
 
     if (Math.floor(num) === num) return 0
-    return num.toString().split('.')[1].length
+    return String(num).split('.')[1].length
   },
 
   /**
@@ -193,7 +193,7 @@ module.exports = {
    */
   pad: function pad(value, width) {
     // Do type checks and throw an error if needed
-    if (!/^(string|number)$/.test(typeof value)) {
+    if (!['string', 'number'].includes(typeof value)) {
       throw new Error('Value must be a string or a number')
     }
     if (typeof width !== 'number') {
@@ -201,7 +201,7 @@ module.exports = {
     }
 
     // If the given value is not a string, make it one
-    if (typeof value !== 'string') value = value.toString()
+    if (typeof value !== 'string') value = String(value)
 
     if (value.length > width)
       throw new Error(
