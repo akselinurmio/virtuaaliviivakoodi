@@ -182,7 +182,7 @@ module.exports = {
     }
 
     if (Math.floor(num) === num) return 0
-    return num.toString().split('.')[1].length
+    return String(num).split('.')[1].length
   },
 
   /**
@@ -201,7 +201,7 @@ module.exports = {
     }
 
     // If the given value is not a string, make it one
-    if (typeof value !== 'string') value = value.toString()
+    if (typeof value !== 'string') value = String(value)
 
     if (value.length > width)
       throw new Error(
