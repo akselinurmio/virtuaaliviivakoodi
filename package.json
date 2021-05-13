@@ -13,15 +13,12 @@
     "iban": "0.0.14"
   },
   "devDependencies": {
-    "@semantic-release/git": "^9.0.0",
     "prettier": "^2.3.0",
-    "semantic-release": "^17.4.3",
     "tap": "^15.0.9"
   },
   "scripts": {
     "lint": "prettier --check '*.json' '*.md' 'src'",
-    "test": "npm run -s lint && tap 'src/*.test.js'",
-    "semantic-release": "semantic-release"
+    "test": "npm run -s lint && tap 'src/*.test.js'"
   },
   "repository": {
     "type": "git",
@@ -34,20 +31,6 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/npm",
-      "@semantic-release/git",
-      [
-        "@semantic-release/github",
-        {
-          "failTitle": false
-        }
-      ],
-      "@semantic-release/release-notes-generator"
-    ]
   },
   "tap": {
     "check-coverage": true
