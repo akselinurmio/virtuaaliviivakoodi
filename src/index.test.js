@@ -9,7 +9,7 @@ test('main function', function mainFunctionTests(t) {
       iban: 'FI37 1590 3000 0007 76',
       reference: 11112,
       cents: 1225,
-      due: '161221'
+      due: '161221',
     }),
     '437159030000007760000122500000000000000000011112161221',
     'Full information on v4'
@@ -20,7 +20,7 @@ test('main function', function mainFunctionTests(t) {
       iban: 'FI37 1590 3000 0007 76',
       reference: 'RF9811112',
       amount: 1.1,
-      due: '170101'
+      due: '170101',
     }),
     '537159030000007760000011098000000000000000011112170101',
     'Full information on v5'
@@ -29,39 +29,39 @@ test('main function', function mainFunctionTests(t) {
   t.equal(
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
-      reference: 11112
+      reference: 11112,
     }),
     '437159030000007760000000000000000000000000011112000000',
     'No amount and due date given'
   )
 
-  t.throws(function() {
+  t.throws(function () {
     virtuaaliviivakoodi()
   }, 'No argument given')
 
-  t.throws(function() {
+  t.throws(function () {
     virtuaaliviivakoodi({
       reference: 'RF9811112',
       amount: 1.1,
-      due: '170101'
+      due: '170101',
     })
   }, 'No IBAN given')
 
-  t.throws(function() {
+  t.throws(function () {
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       amount: 1.1,
-      due: '170101'
+      due: '170101',
     })
   }, 'No reference number given')
 
-  t.throws(function() {
+  t.throws(function () {
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       due: '170101',
       reference: 11112,
       cents: 110,
-      amount: 1.1
+      amount: 1.1,
     })
   }, 'Cents and amount given')
 })

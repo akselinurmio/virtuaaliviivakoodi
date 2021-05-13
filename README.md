@@ -41,7 +41,7 @@ const options = {
   iban: 'FI37 1590 3000 0007 76',
   reference: 11112,
   cents: 1225, // 12.25 euros
-  due: '161221'
+  due: '161221',
 }
 
 virtuaaliviivakoodi(options)
@@ -57,7 +57,7 @@ const options = {
   iban: 'FI37 1590 3000 0007 76',
   reference: 'RF9811112', // Creditor Reference, ISO 11649
   cents: 110, // 1.10 euros
-  due: '170101'
+  due: '170101',
 }
 
 virtuaaliviivakoodi(options)

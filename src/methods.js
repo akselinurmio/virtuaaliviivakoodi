@@ -209,5 +209,5 @@ module.exports = {
       )
 
     return new Array(width - value.length + 1).join('0') + value
-  }
+  },
 }
