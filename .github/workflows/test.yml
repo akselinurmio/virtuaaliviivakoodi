@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
+    name: Run tests for Node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
