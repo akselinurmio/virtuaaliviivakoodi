@@ -1,10 +1,10 @@
-name: Run tests
+name: Test
 
 on: [push, pull_request]
 
 jobs:
   test:
-    name: Run tests for Node.js ${{ matrix.node }}
+    name: Test on Node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,3 +17,5 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm test
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
