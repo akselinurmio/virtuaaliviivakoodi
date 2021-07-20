@@ -9,6 +9,9 @@
   ],
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
+  "files": [
+    "./src/methods.js"
+  ],
   "dependencies": {
     "iban": "0.0.14"
   },
