@@ -1,9 +1,8 @@
 [![npm](https://img.shields.io/npm/v/virtuaaliviivakoodi.svg)](https://www.npmjs.com/package/virtuaaliviivakoodi)
 [![Coveralls](https://img.shields.io/coveralls/akselinurmio/virtuaaliviivakoodi.svg)](https://coveralls.io/github/akselinurmio/virtuaaliviivakoodi)
-[![David](https://img.shields.io/david/akselinurmio/virtuaaliviivakoodi.svg)](https://david-dm.org/akselinurmio/virtuaaliviivakoodi)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/akselinurmio/virtuaaliviivakoodi/master/LICENSE)
 
-_Virtuaaliviivakoodi_ is clear text implementation of [The Federation of Finnish Financial Services](http://www.finanssiala.fi/en)' Pankkiviivakoodi ("Finnish bank transfer barcode"). Pankkiviivakoodi's specification can be found on [their website](http://www.finanssiala.fi/maksujenvalitys/dokumentit/Pankkiviivakoodi-opas.pdf 'Pankkiviivakoodi-opas').
+_Virtuaaliviivakoodi_ is clear text implementation of [The Federation of Finnish Financial Services](https://www.finanssiala.fi/en/)' Pankkiviivakoodi ("Finnish bank transfer barcode"). Pankkiviivakoodi's specification can be found on [their website](https://www.finanssiala.fi/wp-content/uploads/2021/03/Pankkiviivakoodi-opas.pdf 'Pankkiviivakoodi-opas') (in Finnish).
 
 This program creates Virtuaaliviivakoodi with given parameters. It supports both current versions of Pankkiviivakoodi, version 4 (reference number in national form) and version 5 (reference number in international form, aka Creditor Reference based on ISO 11649).
 
