@@ -20,14 +20,14 @@ test('convert ibans', function convertIBANTests(t) {
 
   t.equal(methods.convertIBAN('FI21 1234 5600 0007 85'), '2112345600000785')
   t.throws(function () {
-    methods.convertIBAN('FI34 1234 5600 0007 85')
-  }, "Isn't valid but is Finnish")
+    methods.convertIBAN('FI34123456000007853')
+  }, "Isn't of right length")
   t.throws(function () {
     methods.convertIBAN('EE38 2200 2210 2014 5685')
-  }, "Is valid but isn't Finnish")
+  }, "Isn't Finnish")
   t.throws(function () {
     methods.convertIBAN('623963587892')
-  }, "Isn't valid")
+  }, "Isn't IBAN")
   t.throws(function () {
     methods.convertIBAN(623963587892)
   }, "Isn't a string")
