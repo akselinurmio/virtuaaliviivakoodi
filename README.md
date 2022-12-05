@@ -6,6 +6,10 @@ _Virtuaaliviivakoodi_ is clear text implementation of [The Federation of Finnish
 
 This program creates Virtuaaliviivakoodi with given parameters. It supports both current versions of Pankkiviivakoodi, version 4 (reference number in national form) and version 5 (reference number in international form, aka Creditor Reference based on ISO 11649).
 
+## Supported Node.js versions
+
+The library is currently tested with Node.js LTS versions from 12 to 18. It could work on other versions as well, but no support is guaranteed.
+
 ## Usage
 
 First [install](https://docs.npmjs.com/getting-started/installing-npm-packages-locally 'Installing npm packages locally') virtuaaliviivakoodi package from npm in your project.
