@@ -19,7 +19,7 @@ test('main function', function mainFunctionTests(t) {
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       reference: 'RF9811112',
-      amount: 1.1,
+      cents: 110,
       due: '170101',
     }),
     '537159030000007760000011098000000000000000011112170101',
@@ -60,8 +60,7 @@ test('main function', function mainFunctionTests(t) {
       iban: 'FI37 1590 3000 0007 76',
       due: '170101',
       reference: 11112,
-      cents: 110,
       amount: 1.1,
     })
-  }, 'Cents and amount given')
+  }, 'Removed option amount given')
 })

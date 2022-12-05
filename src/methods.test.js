@@ -88,34 +88,6 @@ test('determine version', function determineVersionTests(t) {
   }, 'Argument not right length')
 })
 
-test('convert amounts', function convertAmountTests(t) {
-  t.plan(8)
-
-  t.equal(methods.convertAmount(25.2), '00002520', 'With cents')
-  t.equal(methods.convertAmount(200), '00020000', 'Integer')
-  t.equal(
-    methods.convertAmount(999999.99),
-    '99999999',
-    'Largest amount possible'
-  )
-
-  t.throws(function () {
-    methods.convertAmount(1000000)
-  }, 'Too big integer')
-  t.throws(function () {
-    methods.convertAmount('27.56')
-  }, 'String')
-  t.throws(function () {
-    methods.convertAmount()
-  }, 'No argument')
-  t.throws(function () {
-    methods.convertAmount(27.566)
-  }, 'Too many decimals')
-  t.throws(function () {
-    methods.convertAmount(-0.01)
-  }, 'Negative value')
-})
-
 test('count amounts of cents', function convertAmountOfCentsTests(t) {
   t.plan(6)
 
