@@ -12,16 +12,20 @@
   "files": [
     "./src/methods.js"
   ],
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6.14.17"
+  },
   "dependencies": {
     "iban": "0.0.14"
   },
   "devDependencies": {
-    "prettier": "^2.3.0",
-    "tap": "^15.0.9"
+    "prettier": "^2.8.0",
+    "tap": "^15.2.3"
   },
   "scripts": {
-    "lint": "prettier --check '*.json' '*.md' 'src'",
-    "test": "npm run -s lint && tap 'src/*.test.js'"
+    "check-formatting": "prettier --check '*.json' '*.md' 'src' '.github/workflows'",
+    "test": "npm run -s check-formatting && tap 'src/*.test.js'"
   },
   "repository": {
     "type": "git",
