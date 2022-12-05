@@ -3,8 +3,6 @@
  * @module virtuaaliviivakoodi/methods
  */
 
-const ibanTool = require('iban')
-
 // Different versions of Virtuaaliviivakoodi
 const versionNational = 4
 const versionInternational = 5
@@ -17,7 +15,7 @@ module.exports = {
    * @returns {String}
    */
   checkDue: function checkDue(due) {
-    const pattern = /^[0-9]{6}$/
+    const pattern = /^\d{6}$/
 
     if (typeof due !== 'string') {
       throw new Error('Due date is not a string')
@@ -30,26 +28,34 @@ module.exports = {
   },
 
   /**
+   * Strips non-alpha-numerical characters off from IBAN
+   * @param {String} iban IBAN
+   * @returns {String} Electronic IBAN
+   */
+  convertIBANToElectronicIBAN: function convertIBANToElectronicIBAN(iban) {
+    return iban.toUpperCase().replace(/[^A-Z0-9]/g, '')
+  },
+
+  /**
    * Convert IBAN account number to suitable format.
    * @param {String} iban
    * @returns {String} Converted IBAN
    */
   convertIBAN: function convertIBAN(iban) {
-    const pattern = /^FI/
+    const pattern = /^FI\d{16}$/
 
     if (typeof iban !== 'string') {
       throw new Error('IBAN value is not a string')
     }
 
-    if (!ibanTool.isValid(iban)) {
-      throw new Error('Given IBAN is not valid')
-    }
-    if (!pattern.test(iban)) {
-      throw new Error('Given IBAN is not Finnish')
+    const electronicIban = this.convertIBANToElectronicIBAN(iban)
+
+    if (!pattern.test(electronicIban)) {
+      throw new Error('Given IBAN must be Finnish IBAN')
     }
 
     // Return electronic format IBAN with country code removed
-    return ibanTool.electronicFormat(iban).substring(2)
+    return electronicIban.substring(2)
   },
 
   /**
@@ -59,7 +65,7 @@ module.exports = {
    * @returns {String} Converted reference number
    */
   convertReference: function convertReference(reference) {
-    if (!/^(string|number)$/.test(typeof reference)) {
+    if (!['string', 'number'].includes(typeof reference)) {
       throw new Error('Given reference is neither number or string')
     }
 
@@ -102,41 +108,6 @@ module.exports = {
       return versionNational
     }
     throw new Error('Given reference is not valid')
-  },
-
-  /**
-   * Converts given amount to 8 characters long string.
-   * The amount can't be negative or bigger than 999999.99.
-   * @deprecated Replaced by {@link convertAmountOfCents}
-   * @param {Number} amount
-   * @returns {String} Padded amount string
-   */
-  convertAmount: function convertAmount(amount) {
-    if (typeof amount !== 'number' || isNaN(amount)) {
-      throw new Error('Given amount is not valid')
-    }
-
-    // Check if the given amount is negative and throw an exception if it is
-    if (amount < 0) {
-      throw new Error('Given amount is negative')
-    }
-
-    // Check if the given amount is too big and throw an exception if it is
-    if (amount > 999999.99) {
-      throw new Error('Given amount is too big')
-    }
-
-    // Check that the amount has two or less decimals
-    const decimals = this.countDecimals(amount)
-    if (decimals > 2) {
-      throw new Error("There can't be more than two decimals in the amount")
-    }
-
-    // Turn the given amount into array of euros and cents
-    const amountArray = amount.toFixed(2).split('.')
-
-    // Return string of padded euros and cents
-    return this.pad(amountArray[0], 6) + amountArray[1]
   },
 
   /**

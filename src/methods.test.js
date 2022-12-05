@@ -20,14 +20,14 @@ test('convert ibans', function convertIBANTests(t) {
 
   t.equal(methods.convertIBAN('FI21 1234 5600 0007 85'), '2112345600000785')
   t.throws(function () {
-    methods.convertIBAN('FI34 1234 5600 0007 85')
-  }, "Isn't valid but is Finnish")
+    methods.convertIBAN('FI34123456000007853')
+  }, "Isn't of right length")
   t.throws(function () {
     methods.convertIBAN('EE38 2200 2210 2014 5685')
-  }, "Is valid but isn't Finnish")
+  }, "Isn't Finnish")
   t.throws(function () {
     methods.convertIBAN('623963587892')
-  }, "Isn't valid")
+  }, "Isn't IBAN")
   t.throws(function () {
     methods.convertIBAN(623963587892)
   }, "Isn't a string")
@@ -86,34 +86,6 @@ test('determine version', function determineVersionTests(t) {
   t.throws(function () {
     methods.referenceToVersion('1')
   }, 'Argument not right length')
-})
-
-test('convert amounts', function convertAmountTests(t) {
-  t.plan(8)
-
-  t.equal(methods.convertAmount(25.2), '00002520', 'With cents')
-  t.equal(methods.convertAmount(200), '00020000', 'Integer')
-  t.equal(
-    methods.convertAmount(999999.99),
-    '99999999',
-    'Largest amount possible'
-  )
-
-  t.throws(function () {
-    methods.convertAmount(1000000)
-  }, 'Too big integer')
-  t.throws(function () {
-    methods.convertAmount('27.56')
-  }, 'String')
-  t.throws(function () {
-    methods.convertAmount()
-  }, 'No argument')
-  t.throws(function () {
-    methods.convertAmount(27.566)
-  }, 'Too many decimals')
-  t.throws(function () {
-    methods.convertAmount(-0.01)
-  }, 'Negative value')
 })
 
 test('count amounts of cents', function convertAmountOfCentsTests(t) {

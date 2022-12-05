@@ -6,6 +6,10 @@ _Virtuaaliviivakoodi_ is clear text implementation of [The Federation of Finnish
 
 This program creates Virtuaaliviivakoodi with given parameters. It supports both current versions of Pankkiviivakoodi, version 4 (reference number in national form) and version 5 (reference number in international form, aka Creditor Reference based on ISO 11649).
 
+## Supported Node.js versions
+
+The library is currently tested with Node.js LTS versions from 12 to 18. It could work on other versions as well, but no support is guaranteed.
+
 ## Usage
 
 First [install](https://docs.npmjs.com/getting-started/installing-npm-packages-locally 'Installing npm packages locally') virtuaaliviivakoodi package from npm in your project.
@@ -23,7 +27,6 @@ Function accepts one parameter: an **object** containing information to be inclu
 | `iban`      | String           |            | IBAN formed account number                                               |
 | `reference` | Number or String |            | Reference number in either international or national form                |
 | `cents`     | Number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                     |
-| `amount`    | Number           | optional   | Deprecated: Amount in euros with maximum of 999999.99                    |
 | `due`       | String           | optional   | Due date in form of "YYMMDD" where YY is year, MM is month and DD is day |
 
 Function returns a string containing the Virtuaaliviivakoodi.

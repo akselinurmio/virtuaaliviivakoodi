@@ -36,13 +36,14 @@ module.exports = function Virtuaaliviivakoodi(options) {
     throw new Error('No reference specified')
   }
 
-  if (options.cents && options.amount) {
-    throw new Error('Give either cents or amount parameter, not both')
+  if ('amount' in options) {
+    throw new Error(
+      'options.amount is unsupported since v2. Use options.cents instead.'
+    )
   }
+
   if (options.cents) {
     formatted.amount = methods.convertAmountOfCents(options.cents)
-  } else if (options.amount) {
-    formatted.amount = methods.convertAmount(options.amount)
   } else {
     formatted.amount = methods.pad('', 8)
   }
