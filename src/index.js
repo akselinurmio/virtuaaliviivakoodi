@@ -1,6 +1,13 @@
 /** @module virtuaaliviivakoodi */
 
-const methods = require('./methods')
+import {
+  convertIBAN,
+  convertReference,
+  referenceToVersion,
+  convertAmountOfCents,
+  checkDue,
+  pad,
+} from './methods.js'
 
 /**
  * Returns Virtuaaliviivakoodi as a string.
@@ -13,7 +20,7 @@ const methods = require('./methods')
  * @param {String} [options.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */
-module.exports = function Virtuaaliviivakoodi(options) {
+function Virtuaaliviivakoodi(options) {
   // Check that "given" parameter is an object
   if (typeof options !== 'object') {
     throw new Error('Object must be given as parameter')
@@ -23,35 +30,35 @@ module.exports = function Virtuaaliviivakoodi(options) {
 
   // IBAN must be given
   if (options.iban) {
-    formatted.iban = methods.convertIBAN(options.iban)
+    formatted.iban = convertIBAN(options.iban)
   } else {
     throw new Error('No IBAN specified')
   }
 
   // Reference must be given
   if (options.reference) {
-    formatted.reference = methods.convertReference(options.reference)
-    formatted.version = methods.referenceToVersion(options.reference)
+    formatted.reference = convertReference(options.reference)
+    formatted.version = referenceToVersion(options.reference)
   } else {
     throw new Error('No reference specified')
   }
 
   if ('amount' in options) {
     throw new Error(
-      'options.amount is unsupported since v2. Use options.cents instead.'
+      'options.amount is unsupported since v2. Use options.cents instead.',
     )
   }
 
   if (options.cents) {
-    formatted.amount = methods.convertAmountOfCents(options.cents)
+    formatted.amount = convertAmountOfCents(options.cents)
   } else {
-    formatted.amount = methods.pad('', 8)
+    formatted.amount = pad('', 8)
   }
 
   if (options.due) {
-    formatted.due = methods.checkDue(options.due)
+    formatted.due = checkDue(options.due)
   } else {
-    formatted.due = methods.pad('', 6)
+    formatted.due = pad('', 6)
   }
 
   return (
@@ -62,3 +69,5 @@ module.exports = function Virtuaaliviivakoodi(options) {
     formatted.due
   )
 }
+
+export default Virtuaaliviivakoodi

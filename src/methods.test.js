@@ -1,139 +1,139 @@
-const test = require('tap').test
-const methods = require('./methods')
+import { test } from 'tap'
+import {
+  checkDue,
+  convertAmountOfCents,
+  convertIBAN,
+  convertReference,
+  countDecimals,
+  pad,
+  referenceToVersion,
+} from './methods.js'
 
-test('check due dates', function checkDueTests(t) {
+test('check due dates', (t) => {
   t.plan(3)
 
-  t.equal(methods.checkDue('160222'), '160222', 'Valid argument')
+  t.equal(checkDue('160222'), '160222', 'Valid argument')
 
-  t.throws(function () {
-    methods.checkDue()
+  t.throws(() => {
+    checkDue()
   }, 'No argument')
 
-  t.throws(function () {
-    methods.checkDue('20170920')
+  t.throws(() => {
+    checkDue('20170920')
   }, 'Argument is string but not valid')
 })
 
-test('convert ibans', function convertIBANTests(t) {
+test('convert ibans', (t) => {
   t.plan(5)
 
-  t.equal(methods.convertIBAN('FI21 1234 5600 0007 85'), '2112345600000785')
-  t.throws(function () {
-    methods.convertIBAN('FI34123456000007853')
+  t.equal(convertIBAN('FI21 1234 5600 0007 85'), '2112345600000785')
+  t.throws(() => {
+    convertIBAN('FI34123456000007853')
   }, "Isn't of right length")
-  t.throws(function () {
-    methods.convertIBAN('EE38 2200 2210 2014 5685')
+  t.throws(() => {
+    convertIBAN('EE38 2200 2210 2014 5685')
   }, "Isn't Finnish")
-  t.throws(function () {
-    methods.convertIBAN('623963587892')
+  t.throws(() => {
+    convertIBAN('623963587892')
   }, "Isn't IBAN")
-  t.throws(function () {
-    methods.convertIBAN(623963587892)
+  t.throws(() => {
+    convertIBAN(623963587892)
   }, "Isn't a string")
 })
 
-test('convert reference numbers', function convertReferenceTests(t) {
+test('convert reference numbers', (t) => {
   t.plan(6)
 
   t.equal(
-    methods.convertReference('12345 67891 23456 78917'),
+    convertReference('12345 67891 23456 78917'),
     '00012345678912345678917',
-    'National reference with spaces'
+    'National reference with spaces',
   )
   t.equal(
-    methods.convertReference(1232),
+    convertReference(1232),
     '00000000000000000001232',
-    'National reference as number'
+    'National reference as number',
   )
 
   t.equal(
-    methods.convertReference('RF54 1111 35'),
+    convertReference('RF54 1111 35'),
     '54000000000000000111135',
-    'International reference with spaces'
+    'International reference with spaces',
   )
   t.equal(
-    methods.convertReference('RF54111135'),
+    convertReference('RF54111135'),
     '54000000000000000111135',
-    'International reference'
+    'International reference',
   )
 
-  t.throws(function () {
-    methods.convertReference()
+  t.throws(() => {
+    convertReference()
   }, 'No argument')
-  t.throws(function () {
-    methods.convertReference('102987-2863')
+  t.throws(() => {
+    convertReference('102987-2863')
   }, 'Argument not valid')
 })
 
-test('determine version', function determineVersionTests(t) {
+test('determine version', (t) => {
   t.plan(4)
 
-  t.equal(
-    methods.referenceToVersion('12345678912345678917'),
-    4,
-    'National reference'
-  )
-  t.equal(
-    methods.referenceToVersion('RF54111135'),
-    5,
-    'International reference'
-  )
+  t.equal(referenceToVersion('12345678912345678917'), 4, 'National reference')
+  t.equal(referenceToVersion('RF54111135'), 5, 'International reference')
 
-  t.throws(function () {
-    methods.referenceToVersion()
+  t.throws(() => {
+    referenceToVersion()
   }, 'No argument')
-  t.throws(function () {
-    methods.referenceToVersion('1')
+  t.throws(() => {
+    referenceToVersion('1')
   }, 'Argument not right length')
 })
 
-test('count amounts of cents', function convertAmountOfCentsTests(t) {
+test('count amounts of cents', (t) => {
   t.plan(6)
 
-  t.equal(methods.convertAmountOfCents(1), '00000001', 'One cent')
-  t.equal(methods.convertAmountOfCents(500), '00000500', 'Five euros')
+  t.equal(convertAmountOfCents(1), '00000001', 'One cent')
+  t.equal(convertAmountOfCents(500), '00000500', 'Five euros')
 
-  t.throws(function () {
-    methods.convertAmountOfCents(-1)
+  t.throws(() => {
+    convertAmountOfCents(-1)
   }, 'Negative')
-  t.throws(function () {
-    methods.convertAmountOfCents(100000000)
+  t.throws(() => {
+    convertAmountOfCents(100000000)
   }, 'Too many cents')
-  t.throws(function () {
-    methods.convertAmountOfCents(1.1)
+  t.throws(() => {
+    convertAmountOfCents(1.1)
   }, 'Floating point')
-  t.throws(function () {
-    methods.convertAmountOfCents('1')
+  t.throws(() => {
+    convertAmountOfCents('1')
   }, 'String as an argument')
 })
 
-test('count decimals', function countDecimals(t) {
+test('count decimals', (t) => {
   t.plan(5)
 
-  t.equal(methods.countDecimals(120), 0, 'No decimals')
-  t.equal(methods.countDecimals(12.1), 1, 'One decimal')
-  t.equal(methods.countDecimals(12.12), 2, 'Two decimals')
-  t.equal(methods.countDecimals(Math.PI), 15, 'Maximum amount of decimals')
+  t.equal(countDecimals(120), 0, 'No decimals')
+  t.equal(countDecimals(12.1), 1, 'One decimal')
+  t.equal(countDecimals(12.12), 2, 'Two decimals')
+  t.equal(countDecimals(Math.PI), 15, 'Maximum amount of decimals')
 
-  t.throws(function () {
-    methods.countDecimals('120')
+  t.throws(() => {
+    countDecimals('120')
   }, 'String as an argument')
 })
 
-test('pad correctly', function padTests(t) {
+test('pad correctly', (t) => {
   t.plan(5)
 
-  t.equal(methods.pad(22, 6), '000022')
-  t.equal(methods.pad(1, 2), '01')
+  t.equal(pad(22, 6), '000022')
+  t.equal(pad(1, 2), '01')
 
-  t.throws(function () {
-    methods.pad('100', 1)
+  t.throws(() => {
+    pad('100', 1)
   }, 'Value is longer than given length')
-  t.throws(function () {
-    methods.pad()
+  t.throws(() => {
+    pad()
   }, 'No arguments')
-  t.throws(function () {
-    methods.pad('99')
+  t.throws(() => {
+    pad('99')
   }, 'No width')
 })

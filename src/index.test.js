@@ -1,7 +1,7 @@
-const test = require('tap').test
-const virtuaaliviivakoodi = require('./')
+import { test } from 'tap'
+import virtuaaliviivakoodi from './index.js'
 
-test('main function', function mainFunctionTests(t) {
+test('main function', (t) => {
   t.plan(7)
 
   t.equal(
@@ -12,7 +12,7 @@ test('main function', function mainFunctionTests(t) {
       due: '161221',
     }),
     '437159030000007760000122500000000000000000011112161221',
-    'Full information on v4'
+    'Full information on v4',
   )
 
   t.equal(
@@ -23,7 +23,7 @@ test('main function', function mainFunctionTests(t) {
       due: '170101',
     }),
     '537159030000007760000011098000000000000000011112170101',
-    'Full information on v5'
+    'Full information on v5',
   )
 
   t.equal(
@@ -32,14 +32,14 @@ test('main function', function mainFunctionTests(t) {
       reference: 11112,
     }),
     '437159030000007760000000000000000000000000011112000000',
-    'No amount and due date given'
+    'No amount and due date given',
   )
 
-  t.throws(function () {
+  t.throws(() => {
     virtuaaliviivakoodi()
   }, 'No argument given')
 
-  t.throws(function () {
+  t.throws(() => {
     virtuaaliviivakoodi({
       reference: 'RF9811112',
       amount: 1.1,
@@ -47,7 +47,7 @@ test('main function', function mainFunctionTests(t) {
     })
   }, 'No IBAN given')
 
-  t.throws(function () {
+  t.throws(() => {
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       amount: 1.1,
@@ -55,7 +55,7 @@ test('main function', function mainFunctionTests(t) {
     })
   }, 'No reference number given')
 
-  t.throws(function () {
+  t.throws(() => {
     virtuaaliviivakoodi({
       iban: 'FI37 1590 3000 0007 76',
       due: '170101',
