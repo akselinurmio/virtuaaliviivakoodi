@@ -8,35 +8,29 @@
     "wire transfer"
   ],
   "type": "module",
-  "module": "./dist/esm/index.js",
-  "main": "./dist/cjs/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "default": "./dist/cjs/index.js"
+    "import": "./dist/index.js",
+    "default": "./dist/index.cjs"
   },
   "files": [
-    "./dist/cjs",
-    "./dist/esm",
-    "./dist/index.d.ts"
+    "./dist"
   ],
   "engines": {
-    "node": ">=12",
-    "npm": ">=6.14.17"
+    "node": ">=12"
   },
   "devDependencies": {
-    "esbuild": "^0.25.2",
     "prettier": "^3.5.3",
     "tap": "^21.1.0",
+    "tsup": "^8.4.0",
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
-    "build:cjs": "esbuild src/index.js --bundle --outdir=dist/cjs --platform=node --target=node12",
-    "build:esm": "esbuild src/index.js --bundle --outdir=dist/esm --platform=neutral",
-    "build:types": "tsc src/index.js --allowJs --declaration --emitDeclarationOnly --outDir ./dist",
-    "check-formatting": "prettier --check '*.json' '*.md' 'src' '.github/workflows'",
-    "test": "npm run -s check-formatting && tap 'src/*.test.js'"
+    "build": "tsup src/index.js --cjsInterop --clean --dts --format cjs,esm",
+    "check-formatting": "prettier --check .",
+    "test": "npm run -s check-formatting && tap 'src/*.test.js'",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",

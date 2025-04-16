@@ -19,7 +19,7 @@ import {
  * @param {String} [options.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */
-function Virtuaaliviivakoodi(options) {
+export default function Virtuaaliviivakoodi(options) {
   // Check that "given" parameter is an object
   if (typeof options !== 'object') {
     throw new Error('Object must be given as parameter')
@@ -68,5 +68,3 @@ function Virtuaaliviivakoodi(options) {
     formatted.due
   )
 }
-
-export default Virtuaaliviivakoodi
