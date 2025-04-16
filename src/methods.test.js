@@ -4,7 +4,6 @@ import {
   convertAmountOfCents,
   convertIBAN,
   convertReference,
-  countDecimals,
   pad,
   referenceToVersion,
 } from './methods.js'
@@ -105,19 +104,6 @@ test('count amounts of cents', (t) => {
   }, 'Floating point')
   t.throws(() => {
     convertAmountOfCents('1')
-  }, 'String as an argument')
-})
-
-test('count decimals', (t) => {
-  t.plan(5)
-
-  t.equal(countDecimals(120), 0, 'No decimals')
-  t.equal(countDecimals(12.1), 1, 'One decimal')
-  t.equal(countDecimals(12.12), 2, 'Two decimals')
-  t.equal(countDecimals(Math.PI), 15, 'Maximum amount of decimals')
-
-  t.throws(() => {
-    countDecimals('120')
   }, 'String as an argument')
 })
 

@@ -41,15 +41,13 @@ export function convertIBANToElectronicIBAN(iban) {
  * @returns {String} Converted IBAN
  */
 export function convertIBAN(iban) {
-  const pattern = /^FI\d{16}$/
-
   if (typeof iban !== 'string') {
     throw new Error('IBAN value is not a string')
   }
 
   const electronicIban = convertIBANToElectronicIBAN(iban)
 
-  if (!pattern.test(electronicIban)) {
+  if (!/^FI\d{16}$/.test(electronicIban)) {
     throw new Error('Given IBAN must be Finnish IBAN')
   }
 
@@ -130,28 +128,12 @@ export function convertAmountOfCents(cents) {
   }
 
   // Check that cents is an integer
-  const isInteger = countDecimals(cents) === 0
-  if (!isInteger) {
+  if (!Number.isInteger(cents)) {
     throw new Error('Given amount is not an integer')
   }
 
   // Return string of padded cents
   return pad(cents, 8)
-}
-
-/**
- * Counts number of decimals
- * @param {Number} number
- * @returns {Number} Number of decimals
- */
-export function countDecimals(num) {
-  // Check that the argument is a number
-  if (typeof num !== 'number' || isNaN(num)) {
-    throw new Error('Given parameter is not a number')
-  }
-
-  if (Math.floor(num) === num) return 0
-  return String(num).split('.')[1].length
 }
 
 /**
@@ -177,8 +159,5 @@ export function pad(value, width) {
       `Value is ${value.length} characters long, maximum being ${width}`,
     )
 
-  return new Array(width - value.length + 1).join('0') + value
+  return value.padStart(width, '0')
 }
-
-// Also export the version constants
-export { versionNational, versionInternational }

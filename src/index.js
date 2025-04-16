@@ -16,7 +16,6 @@ import {
  * @param {String} options.iban - IBAN formed account number
  * @param {Number|String} options.reference - Reference number in either international or national form
  * @param {Number} [options.cents] - Amount in cents (1€ = 100c) with maximum of 99999999
- * @param {Number} [options.amount] - Deprecated: Amount in euros with maximum of 999999.99
  * @param {String} [options.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
  * @returns {String} Virtuaaliviivakoodi
  */
