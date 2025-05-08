@@ -3,17 +3,14 @@
  * @module virtuaaliviivakoodi/methods
  */
 
-// Different versions of Virtuaaliviivakoodi
 const versionNational = 4
 const versionInternational = 5
 
 /**
  * Check that given due date is of proper length and return only valid string.
  * Due date needs to be exactly 6 characters long string consisting of digits.
- * @param {String} due
- * @returns {String}
  */
-export function checkDue(due) {
+export function checkDue(due: string): string {
   const pattern = /^\d{6}$/
 
   if (typeof due !== 'string') {
@@ -28,19 +25,15 @@ export function checkDue(due) {
 
 /**
  * Strips non-alpha-numerical characters off from IBAN
- * @param {String} iban IBAN
- * @returns {String} Electronic IBAN
  */
-export function convertIBANToElectronicIBAN(iban) {
+export function convertIBANToElectronicIBAN(iban: string): string {
   return iban.toUpperCase().replace(/[^A-Z0-9]/g, '')
 }
 
 /**
  * Convert IBAN account number to suitable format.
- * @param {String} iban
- * @returns {String} Converted IBAN
  */
-export function convertIBAN(iban) {
+export function convertIBAN(iban: string): string {
   if (typeof iban !== 'string') {
     throw new Error('IBAN value is not a string')
   }
@@ -51,28 +44,22 @@ export function convertIBAN(iban) {
     throw new Error('Given IBAN must be Finnish IBAN')
   }
 
-  // Return electronic format IBAN with country code removed
   return electronicIban.substring(2)
 }
 
 /**
  * Convert reference number to sufficiently padded format.
  * Defines reference's type automatically.
- * @param {Number|String} reference
- * @returns {String} Converted reference number
  */
-export function convertReference(reference) {
+export function convertReference(reference: number | string): string {
   if (!['string', 'number'].includes(typeof reference)) {
     throw new Error('Given reference is neither number or string')
   }
 
-  // Convert the reference number to string and remove any whitespace
   reference = String(reference).replace(/\s/g, '')
 
-  // Determine how to pad the reference from the version
   const version = referenceToVersion(reference)
 
-  // In case of international reference we pad everything after checksum
   if (version === versionInternational) {
     reference = reference.substring(2, 4) + pad(reference.substring(4), 21)
   }
@@ -83,15 +70,12 @@ export function convertReference(reference) {
 /**
  * Determine Virtuaaliviivakoodi's version by given reference number.
  * Return values are 5 = international reference and 4 = national type.
- * @param {Number|String} reference - Reference number
- * @returns {Number} The version
  */
-export function referenceToVersion(reference) {
+export function referenceToVersion(reference: number | string): 4 | 5 {
   if (!['string', 'number'].includes(typeof reference)) {
     throw new Error('Given reference is neither number or string')
   }
 
-  // Convert the reference number to string and remove any whitespace
   const referenceString = String(reference).replace(/\s/g, '')
 
   const internationalPattern = /^RF[0-9]{3,23}$/
@@ -109,41 +93,31 @@ export function referenceToVersion(reference) {
 /**
  * Converts given amount of cents to 8 characters long string.
  * The amount can't be negative or bigger than 99999999.
- * @param {Number} cents
- * @returns {String} Padded amount string
  */
-export function convertAmountOfCents(cents) {
+export function convertAmountOfCents(cents: number): string {
   if (typeof cents !== 'number' || isNaN(cents)) {
     throw new Error('Given argument is not a number')
   }
 
-  // Throw if the amount of cents is negative
   if (cents < 0) {
     throw new Error('Given amount is negative')
   }
 
-  // Throw if the amount of cents is too large
   if (cents > 99999999) {
     throw new Error('Given amount is too large')
   }
 
-  // Check that cents is an integer
   if (!Number.isInteger(cents)) {
     throw new Error('Given amount is not an integer')
   }
 
-  // Return string of padded cents
   return pad(cents, 8)
 }
 
 /**
  * Pads values to fixed width with zero.
- * @param {String|Number} value
- * @param {Number} width
- * @returns {String}
  */
-export function pad(value, width) {
-  // Do type checks and throw an error if needed
+export function pad(value: string | number, width: number): string {
   if (!['string', 'number'].includes(typeof value)) {
     throw new Error('Value must be a string or a number')
   }
@@ -151,7 +125,6 @@ export function pad(value, width) {
     throw new Error('Width must be a number')
   }
 
-  // If the given value is not a string, make it one
   if (typeof value !== 'string') value = String(value)
 
   if (value.length > width)

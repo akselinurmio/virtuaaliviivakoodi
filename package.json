@@ -27,7 +27,7 @@
     "typescript": "^5.8.3"
   },
   "scripts": {
-    "build": "tsup src/index.js --cjsInterop --clean --dts --format cjs,esm",
+    "build": "tsup src/index.ts --cjsInterop --clean --dts --format cjs,esm",
     "check-formatting": "prettier --check .",
     "test": "tap 'src/*.test.js'",
     "prepublishOnly": "npm run build"

@@ -9,35 +9,35 @@ import {
   pad,
 } from './methods.js'
 
-/**
- * Returns Virtuaaliviivakoodi as a string.
- * Use only cents OR amount, not both.
- * @param {Object} options - Information that will be included.
- * @param {String} options.iban - IBAN formed account number
- * @param {Number|String} options.reference - Reference number in either international or national form
- * @param {Number} [options.cents] - Amount in cents (1€ = 100c) with maximum of 99999999
- * @param {String} [options.due] - Due date in form of "vvkkpp" where vv is year, kk is month and pp is day
- * @returns {String} Virtuaaliviivakoodi
- */
-export default function Virtuaaliviivakoodi(options) {
-  // Check that "given" parameter is an object
+interface VirtuaaliviivakoodiOptions {
+  /** IBAN account number */
+  iban: string
+  /** The reference number */
+  reference: number | string
+  /** The amount in cents */
+  cents?: number
+  /** The due date (optional) */
+  due?: string
+}
+
+export default function Virtuaaliviivakoodi(
+  options: VirtuaaliviivakoodiOptions,
+): string {
   if (typeof options !== 'object') {
     throw new Error('Object must be given as parameter')
   }
 
-  const formatted = {}
+  const formatted: Record<string, string> = {}
 
-  // IBAN must be given
   if (options.iban) {
     formatted.iban = convertIBAN(options.iban)
   } else {
     throw new Error('No IBAN specified')
   }
 
-  // Reference must be given
   if (options.reference) {
     formatted.reference = convertReference(options.reference)
-    formatted.version = referenceToVersion(options.reference)
+    formatted.version = referenceToVersion(options.reference).toString()
   } else {
     throw new Error('No reference specified')
   }
