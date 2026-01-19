@@ -28,7 +28,7 @@
   "scripts": {
     "build": "tsup src/index.ts --cjsInterop --clean --dts --format cjs,esm",
     "check-formatting": "prettier --check .",
-    "test": "npm run build && node --test 'test/**/*.test.js' 'test/**/*.test.cjs'",
+    "test": "npm run build && node --test",
     "prepublishOnly": "npm run build"
   },
   "repository": {

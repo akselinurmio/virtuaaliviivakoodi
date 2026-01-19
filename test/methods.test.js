@@ -29,7 +29,10 @@ test('check due dates', { plan: 3 }, (t) => {
 })
 
 test('convert ibans', { plan: 5 }, (t) => {
-  t.assert.strictEqual(convertIBAN('FI21 1234 5600 0007 85'), '2112345600000785')
+  t.assert.strictEqual(
+    convertIBAN('FI21 1234 5600 0007 85'),
+    '2112345600000785',
+  )
   t.assert.throws(
     () => {
       convertIBAN('FI34123456000007853')
@@ -100,8 +103,16 @@ test('convert reference numbers', { plan: 6 }, (t) => {
 })
 
 test('determine version', { plan: 4 }, (t) => {
-  t.assert.strictEqual(referenceToVersion('12345678912345678917'), 4, 'National reference')
-  t.assert.strictEqual(referenceToVersion('RF54111135'), 5, 'International reference')
+  t.assert.strictEqual(
+    referenceToVersion('12345678912345678917'),
+    4,
+    'National reference',
+  )
+  t.assert.strictEqual(
+    referenceToVersion('RF54111135'),
+    5,
+    'International reference',
+  )
 
   t.assert.throws(
     () => {
