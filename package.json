@@ -4,31 +4,38 @@
   "description": "Creates the numeral value of Finnish bank transfer barcode",
   "keywords": [
     "pankkiviivakoodi",
+    "virtuaaliviivakoodi",
     "bank transfer",
     "wire transfer"
   ],
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    "import": "./dist/index.js",
+    "default": "./dist/index.cjs"
+  },
   "files": [
-    "./src/index.d.ts",
-    "./src/index.js",
-    "./src/methods.js"
+    "./dist"
   ],
   "engines": {
-    "node": ">=12",
-    "npm": ">=6.14.17"
+    "node": ">=20"
   },
   "devDependencies": {
-    "prettier": "^2.8.0",
-    "tap": "^16.3.2"
+    "prettier": "^3.8.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
   },
   "scripts": {
-    "check-formatting": "prettier --check '*.json' '*.md' 'src' '.github/workflows'",
-    "test": "npm run -s check-formatting && tap 'src/*.test.js'"
+    "build": "tsup src/index.ts --cjsInterop --clean --dts --format cjs,esm",
+    "check-formatting": "prettier --check .",
+    "test": "npm run build && node --test 'test/index.test.js' 'test/index.test.cjs'",
+    "test:internals": "node --test 'test/methods.test.js'",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/akselinurmio/virtuaaliviivakoodi.git"
+    "url": "git+https://github.com/akselinurmio/virtuaaliviivakoodi.git"
   },
   "author": "Akseli Nurmio <akseli@nurmio.fi> (https://akselinurmio.fi)",
   "license": "MIT",
@@ -37,8 +44,5 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "tap": {
-    "check-coverage": true
   }
 }
