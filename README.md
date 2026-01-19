@@ -6,7 +6,7 @@ _Virtuaaliviivakoodi_ is clear text implementation of
 [The Federation of Finnish Financial Services](https://www.finanssiala.fi/en/)'
 Pankkiviivakoodi ("Finnish bank transfer barcode"). Pankkiviivakoodi's
 specification can be found on
-[their website](https://www.finanssiala.fi/wp-content/uploads/2021/03/Pankkiviivakoodi-opas.pdf "Pankkiviivakoodi-opas")
+[their website](https://www.finanssiala.fi/wp-content/uploads/2021/03/Pankkiviivakoodi-opas.pdf 'Pankkiviivakoodi-opas')
 (in Finnish).
 
 This program creates Virtuaaliviivakoodi with given parameters. It supports both
@@ -22,7 +22,7 @@ and 24.
 ## Usage
 
 First
-[install](https://docs.npmjs.com/getting-started/installing-npm-packages-locally "Installing npm packages locally")
+[install](https://docs.npmjs.com/getting-started/installing-npm-packages-locally 'Installing npm packages locally')
 virtuaaliviivakoodi package from npm in your project.
 
 ```sh
@@ -49,32 +49,32 @@ Function returns a string containing the Virtuaaliviivakoodi.
 #### Version 4 (ESM)
 
 ```javascript
-import virtuaaliviivakoodi from "virtuaaliviivakoodi";
+import virtuaaliviivakoodi from 'virtuaaliviivakoodi'
 
 const options = {
-  iban: "FI37 1590 3000 0007 76",
+  iban: 'FI37 1590 3000 0007 76',
   reference: 11112,
   cents: 1225, // 12.25 euros
-  due: "161221",
-};
+  due: '161221',
+}
 
-virtuaaliviivakoodi(options);
+virtuaaliviivakoodi(options)
 // => "437159030000007760000122500000000000000000011112161221"
 ```
 
 #### Version 5 (ESM)
 
 ```javascript
-import virtuaaliviivakoodi from "virtuaaliviivakoodi";
+import virtuaaliviivakoodi from 'virtuaaliviivakoodi'
 
 const options = {
-  iban: "FI37 1590 3000 0007 76",
-  reference: "RF9811112", // Creditor Reference, ISO 11649
+  iban: 'FI37 1590 3000 0007 76',
+  reference: 'RF9811112', // Creditor Reference, ISO 11649
   cents: 110, // 1.10 euros
-  due: "170101",
-};
+  due: '170101',
+}
 
-virtuaaliviivakoodi(options);
+virtuaaliviivakoodi(options)
 // => "537159030000007760000011098000000000000000011112170101"
 ```
 
@@ -83,15 +83,15 @@ virtuaaliviivakoodi(options);
 The package also supports CommonJS:
 
 ```javascript
-const virtuaaliviivakoodi = require("virtuaaliviivakoodi");
+const virtuaaliviivakoodi = require('virtuaaliviivakoodi')
 
 const options = {
-  iban: "FI37 1590 3000 0007 76",
+  iban: 'FI37 1590 3000 0007 76',
   reference: 11112,
   cents: 1225,
-  due: "161221",
-};
+  due: '161221',
+}
 
-virtuaaliviivakoodi(options);
+virtuaaliviivakoodi(options)
 // => "437159030000007760000122500000000000000000011112161221"
 ```
