@@ -13,6 +13,17 @@ jobs:
           node-version: 24
       - run: npm ci
       - run: npm run check-formatting
+  test-internals:
+    name: Test internals on Node.js 24
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm run test:internals
   test:
     name: Test on Node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
