@@ -6,21 +6,78 @@
 const versionNational = 4
 const versionInternational = 5
 
+export interface DueDateObject {
+  day: number
+  month: number
+  year: number
+}
+
+function isValidDate(year: number, month: number, day: number): boolean {
+  const date = new Date(year, month - 1, day)
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  )
+}
+
+function toYYMMDD(year: number, month: number, day: number): string {
+  if (!isValidDate(year, month, day)) {
+    throw new Error('Due date is not a valid calendar date')
+  }
+  return `${pad(year % 100, 2)}${pad(month, 2)}${pad(day, 2)}`
+}
+
 /**
- * Check that given due date is of proper length and return only valid string.
- * Due date needs to be exactly 6 characters long string consisting of digits.
+ * Converts a due date to YYMMDD format.
+ * Accepts string in YYMMDD format, string in ISO 8601 format (YYYY-MM-DD),
+ * or object with day, month, year properties.
  */
-export function checkDue(due: string): string {
-  const pattern = /^\d{6}$/
+export function convertDueDate(due: string | DueDateObject): string {
+  if (typeof due === 'string') {
+    const yymmddMatch = due.match(/^(\d{2})(\d{2})(\d{2})$/)
+    if (yymmddMatch) {
+      const [, yy, mm, dd] = yymmddMatch
+      toYYMMDD(2000 + parseInt(yy, 10), parseInt(mm, 10), parseInt(dd, 10))
+      return due
+    }
 
-  if (typeof due !== 'string') {
-    throw new Error('Due date is not a string')
-  }
-  if (!pattern.test(due)) {
-    throw new Error('Due date is not valid')
+    const isoMatch = due.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+    if (isoMatch) {
+      const [, yyyy, mm, dd] = isoMatch
+      return toYYMMDD(parseInt(yyyy, 10), parseInt(mm, 10), parseInt(dd, 10))
+    }
+
+    throw new Error(
+      'Due date string must be in YYMMDD or YYYY-MM-DD (ISO 8601) format',
+    )
   }
 
-  return due
+  if (typeof due === 'object' && due !== null) {
+    const { day, month, year } = due
+
+    if (
+      typeof day !== 'number' ||
+      typeof month !== 'number' ||
+      typeof year !== 'number'
+    ) {
+      throw new Error(
+        'Due date object must have numeric day, month, and year properties',
+      )
+    }
+
+    if (
+      !Number.isInteger(day) ||
+      !Number.isInteger(month) ||
+      !Number.isInteger(year)
+    ) {
+      throw new Error('Due date object properties must be integers')
+    }
+
+    return toYYMMDD(year, month, day)
+  }
+
+  throw new Error('Due date must be a string or an object')
 }
 
 /**

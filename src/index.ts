@@ -1,12 +1,13 @@
 /** @module virtuaaliviivakoodi */
 
 import {
+  convertAmountOfCents,
+  convertDueDate,
   convertIBAN,
   convertReference,
-  referenceToVersion,
-  convertAmountOfCents,
-  checkDue,
   pad,
+  referenceToVersion,
+  type DueDateObject,
 } from './methods.js'
 
 interface VirtuaaliviivakoodiOptions {
@@ -16,8 +17,8 @@ interface VirtuaaliviivakoodiOptions {
   reference: number | string
   /** The amount in cents (optional) */
   cents?: number
-  /** The due date (optional) */
-  due?: string
+  /** The due date (optional) - YYMMDD string, YYYY-MM-DD ISO 8601 string, or object with day, month, year (January = 1) */
+  due?: string | DueDateObject
 }
 
 export default function Virtuaaliviivakoodi(
@@ -27,20 +28,17 @@ export default function Virtuaaliviivakoodi(
     throw new Error('Object must be given as parameter')
   }
 
-  const formatted: Record<string, string> = {}
+  let result = ''
 
-  if (options.iban) {
-    formatted.iban = convertIBAN(options.iban)
-  } else {
-    throw new Error('No IBAN specified')
-  }
-
-  if (options.reference) {
-    formatted.reference = convertReference(options.reference)
-    formatted.version = referenceToVersion(options.reference).toString()
-  } else {
+  if (!options.reference) {
     throw new Error('No reference specified')
   }
+  result += referenceToVersion(options.reference).toString()
+
+  if (!options.iban) {
+    throw new Error('No IBAN specified')
+  }
+  result += convertIBAN(options.iban)
 
   if ('amount' in options) {
     throw new Error(
@@ -49,22 +47,18 @@ export default function Virtuaaliviivakoodi(
   }
 
   if (options.cents) {
-    formatted.amount = convertAmountOfCents(options.cents)
+    result += convertAmountOfCents(options.cents)
   } else {
-    formatted.amount = pad('', 8)
+    result += pad('', 8)
   }
+
+  result += convertReference(options.reference)
 
   if (options.due) {
-    formatted.due = checkDue(options.due)
+    result += convertDueDate(options.due)
   } else {
-    formatted.due = pad('', 6)
+    result += pad('', 6)
   }
 
-  return (
-    formatted.version +
-    formatted.iban +
-    formatted.amount +
-    formatted.reference +
-    formatted.due
-  )
+  return result
 }

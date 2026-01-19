@@ -34,12 +34,12 @@ default function.
 Function accepts one parameter: an **object** containing information to be
 included in Virtuaaliviivakoodi. Following parameters are understood:
 
-| Name        | Type             | Attributes | Description                                                              |
-| ----------- | ---------------- | ---------- | ------------------------------------------------------------------------ |
-| `iban`      | string           |            | IBAN formed account number                                               |
-| `reference` | number or string |            | Reference number in either international or national form                |
-| `cents`     | number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                     |
-| `due`       | string           | optional   | Due date in form of "YYMMDD" where YY is year, MM is month and DD is day |
+| Name        | Type             | Attributes | Description                                                                                                             |
+| ----------- | ---------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `iban`      | string           |            | IBAN formed account number                                                                                              |
+| `reference` | number or string |            | Reference number in either international or national form                                                               |
+| `cents`     | number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                                                                    |
+| `due`       | string or object | optional   | Due date as "YYMMDD" string, "YYYY-MM-DD" ISO 8601 string, or object with `{day, month, year}` properties (January = 1) |
 
 Function returns a string containing the Virtuaaliviivakoodi.
 
