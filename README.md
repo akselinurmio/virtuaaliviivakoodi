@@ -1,5 +1,4 @@
 [![npm](https://img.shields.io/npm/v/virtuaaliviivakoodi.svg)](https://www.npmjs.com/package/virtuaaliviivakoodi)
-[![Coveralls](https://img.shields.io/coveralls/akselinurmio/virtuaaliviivakoodi.svg)](https://coveralls.io/github/akselinurmio/virtuaaliviivakoodi)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/akselinurmio/virtuaaliviivakoodi/master/LICENSE)
 
 _Virtuaaliviivakoodi_ is clear text implementation of
@@ -37,10 +36,10 @@ included in Virtuaaliviivakoodi. Following parameters are understood:
 
 | Name        | Type             | Attributes | Description                                                              |
 | ----------- | ---------------- | ---------- | ------------------------------------------------------------------------ |
-| `iban`      | String           |            | IBAN formed account number                                               |
-| `reference` | Number or String |            | Reference number in either international or national form                |
-| `cents`     | Number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                     |
-| `due`       | String           | optional   | Due date in form of "YYMMDD" where YY is year, MM is month and DD is day |
+| `iban`      | string           |            | IBAN formed account number                                               |
+| `reference` | number or string |            | Reference number in either international or national form                |
+| `cents`     | number           | optional   | Amount in cents (1€ = 100c) with maximum of 99999999                     |
+| `due`       | string           | optional   | Due date in form of "YYMMDD" where YY is year, MM is month and DD is day |
 
 Function returns a string containing the Virtuaaliviivakoodi.
 
