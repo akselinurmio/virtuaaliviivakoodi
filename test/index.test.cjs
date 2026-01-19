@@ -1,5 +1,5 @@
 const { test } = require('node:test')
-const virtuaaliviivakoodi = require('../dist/index.cjs').default
+const virtuaaliviivakoodi = require('../dist/index.cjs')
 
 test('main function in CJS', { plan: 7 }, (t) => {
   t.assert.strictEqual(

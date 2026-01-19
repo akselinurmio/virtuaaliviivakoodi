@@ -14,7 +14,7 @@ interface VirtuaaliviivakoodiOptions {
   iban: string
   /** The reference number */
   reference: number | string
-  /** The amount in cents */
+  /** The amount in cents (optional) */
   cents?: number
   /** The due date (optional) */
   due?: string
