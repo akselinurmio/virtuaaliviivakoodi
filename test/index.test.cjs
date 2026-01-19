@@ -60,7 +60,6 @@ describe('virtuaaliviivakoodi CJS', () => {
       () =>
         virtuaaliviivakoodi({
           iban: 'FI37 1590 3000 0007 76',
-          amount: 1.1,
           due: '170101',
         }),
       { message: /No reference specified/ },
