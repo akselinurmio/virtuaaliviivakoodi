@@ -4,6 +4,7 @@
   "description": "Creates the numeral value of Finnish bank transfer barcode",
   "keywords": [
     "pankkiviivakoodi",
+    "virtuaaliviivakoodi",
     "bank transfer",
     "wire transfer"
   ],
@@ -21,15 +22,13 @@
     "node": ">=20"
   },
   "devDependencies": {
-    "prettier": "^3.5.3",
-    "tap": "^21.1.0",
-    "tsup": "^8.4.0",
-    "typescript": "^5.8.3"
+    "prettier": "^3.8.0",
+    "tsup": "^8.5.1"
   },
   "scripts": {
     "build": "tsup src/index.ts --cjsInterop --clean --dts --format cjs,esm",
     "check-formatting": "prettier --check .",
-    "test": "tap 'src/*.test.js'",
+    "test": "npm run build && node --test 'test/**/*.test.js' 'test/**/*.test.cjs'",
     "prepublishOnly": "npm run build"
   },
   "repository": {
