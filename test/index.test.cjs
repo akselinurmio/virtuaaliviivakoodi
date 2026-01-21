@@ -48,7 +48,7 @@ describe('virtuaaliviivakoodi CJS', () => {
       () =>
         virtuaaliviivakoodi({
           reference: 'RF9811112',
-          amount: 1.1,
+          cents: 110,
           due: '170101',
         }),
       { message: /No IBAN specified/ },
@@ -75,7 +75,7 @@ describe('virtuaaliviivakoodi CJS', () => {
           reference: 11112,
           amount: 1.1,
         }),
-      { message: /options.amount is unsupported/ },
+      { message: /options\.amount is unsupported/ },
     )
   })
 
