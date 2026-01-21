@@ -21,10 +21,14 @@ function isValidDate(year: number, month: number, day: number): boolean {
   )
 }
 
-function toYYMMDD(year: number, month: number, day: number): string {
+function assertValidDate(year: number, month: number, day: number): void {
   if (!isValidDate(year, month, day)) {
     throw new Error('Due date is not a valid calendar date')
   }
+}
+
+function toYYMMDD(year: number, month: number, day: number): string {
+  assertValidDate(year, month, day)
   return `${pad(year % 100, 2)}${pad(month, 2)}${pad(day, 2)}`
 }
 
@@ -38,7 +42,11 @@ export function convertDueDate(due: string | DueDateObject): string {
     const yymmddMatch = due.match(/^(\d{2})(\d{2})(\d{2})$/)
     if (yymmddMatch) {
       const [, yy, mm, dd] = yymmddMatch
-      toYYMMDD(2000 + parseInt(yy, 10), parseInt(mm, 10), parseInt(dd, 10))
+      assertValidDate(
+        2000 + parseInt(yy, 10),
+        parseInt(mm, 10),
+        parseInt(dd, 10),
+      )
       return due
     }
 
