@@ -31,7 +31,7 @@
     "check-formatting": "prettier --check .",
     "test": "npm run build && node --test 'test/index.test.js' 'test/index.test.cjs'",
     "test:internals": "node --test 'test/methods.test.js'",
-    "prepublishOnly": "npm run build"
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
